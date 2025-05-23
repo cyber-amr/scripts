@@ -209,6 +209,9 @@ EOF
 		sed -i '1i picom -b &' $HOME/.xinitrc
 	fi
 
+	# intel iGPU drivers 
+	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
+
 	if has_nvidia_gpu; then
 		echo "NVIDIA GPU detected. Installing NVIDIA drivers..."
 		$doas xbps-install -y nvidia nvidia-libs-32bit
