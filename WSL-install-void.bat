@@ -24,7 +24,7 @@ curl.exe -LSfs --remote-name --remove-on-error https://amr-dev.info/scripts/void
 wsl -d %DISTRONAME% -e sh -c "USERNAME=%USER% ./void-init.sh --wsl"
 
 wsl --terminate %DISTRONAME%
-wsl -d %DISTRONAME% -e sh -c "./void-setup.sh --no-gui"
+wsl -d %DISTRONAME% -e sh -c "./void-setup.sh --sync --julia"
 
 cd ..
 rd /s /q .void-on-WSL2.temp
