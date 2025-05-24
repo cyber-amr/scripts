@@ -153,6 +153,8 @@ if [ $install_gui -eq 1 ]; then
 
 	echo "Setting up lightdm..."
 
+	$doas xbps-install -y lightdm lightdm-gtk3-greeter
+ 
 	$doas sed -i 's/^#greeter-session=.*/greeter-session=lightdm-gtk3-greeter/' /etc/lightdm/lightdm.conf
 	$doas sed -i 's/^#user-session=.*/user-session=dwm/' /etc/lightdm/lightdm.conf
 
