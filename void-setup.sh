@@ -151,26 +151,6 @@ if [ $install_gui -eq 1 ]; then
 
 	echo 'exec dwm' > $HOME/.xinitrc
 
-	echo "Setting up lightdm..."
-
-	$doas xbps-install -y lightdm lightdm-gtk3-greeter
- 
-	$doas sed -i 's/^#greeter-session=.*/greeter-session=lightdm-gtk3-greeter/' /etc/lightdm/lightdm.conf
-	$doas sed -i 's/^#user-session=.*/user-session=dwm/' /etc/lightdm/lightdm.conf
-
-	$doas mkdir -p /usr/share/xsessions/
-	$doas tee /usr/share/xsessions/dwm.desktop > /dev/null <<EOF
-[Desktop Entry]
-Name=dwm
-Comment=Dynamic window manager
-Exec=dwm
-TryExec=dwm
-Icon=
-Type=Application
-EOF
-
-	$doas ln -s /etc/sv/lightdm /var/service/
-
 	echo "Setting up compositor..."
 
 	$doas xbps-install -y picom
