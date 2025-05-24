@@ -248,7 +248,7 @@ if [ $install_julia -eq 1 ]; then
 	echo "Installing Julia..."
 	$doas xbps-install -y juliaup
 	
-	if [ ! -L /usr/bin/julia ]; then
+	if [ ! -e /usr/bin/julia ]; then
 		$doas ln -s /usr/bin/julialauncher /usr/bin/julia
 	fi
 
