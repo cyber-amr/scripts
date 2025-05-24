@@ -156,6 +156,7 @@ if [ $install_gui -eq 1 ]; then
 	$doas sed -i 's/^#greeter-session=.*/greeter-session=lightdm-gtk3-greeter/' /etc/lightdm/lightdm.conf
 	$doas sed -i 's/^#user-session=.*/user-session=dwm/' /etc/lightdm/lightdm.conf
 
+	$doas mkdir -p /usr/share/xsessions/
 	$doas tee /usr/share/xsessions/dwm.desktop > /dev/null <<EOF
 [Desktop Entry]
 Name=dwm
