@@ -155,11 +155,11 @@ if [ $install_gui -eq 1 ]; then
 		cat <<'EOL' >> $HOME/.bash_profile
 
 if [ "$(tty)" = "/dev/tty1" ] && [ -z "$DISPLAY" ]; then
-    exec startx
+	exec startx
 fi
 
 EOL
-    fi
+	fi
 
 	echo "Setting up compositor..."
 
