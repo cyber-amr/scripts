@@ -180,7 +180,6 @@ backend = "glx";
 vsync = true;
 detect-rounded-corners = true;
 detect-client-opacity = true;
-refresh-rate = 0;
 detect-transient = true;
 detect-client-leader = true;
 use-damage = true;
