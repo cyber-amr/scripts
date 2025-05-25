@@ -115,10 +115,18 @@ fi
 if [ $setup_policykit -eq 1 ]; then
 	echo "Setting up PolicyKit..."
 
-	$doas xbps-install -y polkit polkit-elogind
+	$doas xbps-install -y polkit polkit-elogind elogind
+
+	if [ ! -L /var/service/dbus ]; then
+		$doas ln -s /etc/sv/dbus /var/service/
+	fi
 
 	if [ ! -L /var/service/elogind ]; then
 		$doas ln -s /etc/sv/elogind /var/service/
+	fi
+
+	if [ ! -L /var/service/polkitd ]; then
+		$doas ln -s /etc/sv/polkitd /var/service/
 	fi
 
 	$doas usermod -aG wheel "$USER"
