@@ -157,7 +157,9 @@ if [ $install_gui -eq 1 ]; then
 	$doas make clean install -C ./dmenu
 	$doas make clean install -C ./st
 
-	echo 'exec dwm' > $HOME/.xinitrc
+	if ! grep -q 'exec dwm' $HOME/.xinitrc 2>/dev/null; then
+		echo 'exec dwm' >> $HOME/.xinitrc
+	fi
 
 	if ! grep -q 'exec startx' $HOME/.bash_profile 2>/dev/null; then
 		cat <<'EOL' >> $HOME/.bash_profile
