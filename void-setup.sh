@@ -84,7 +84,7 @@ while [ $# -gt 0 ]; do
 	esac
 	shift
 done
-	
+
 if command -v doas &> /dev/null; then
 	doas="doas"
 else
@@ -202,13 +202,13 @@ EOF
 		sed -i '1i picom -b &' $HOME/.xinitrc
 	fi
 
-	# intel iGPU drivers 
+	# intel iGPU drivers
 	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
 
 	if has_nvidia_gpu; then
 		echo "NVIDIA GPU detected. Installing NVIDIA drivers..."
 		$doas xbps-install -y nvidia nvidia-libs-32bit
-		
+
 		# Add nvidia modules to be loaded at boot
 		if ! grep -q "nvidia" /etc/modules-load.d/nvidia.conf 2>/dev/null; then
 			$doas mkdir -p /etc/modules-load.d
@@ -219,15 +219,15 @@ nvidia_uvm
 nvidia_drm
 EOF
 		fi
-		
+
 		# Configure Xorg for NVIDIA
 		$doas nvidia-xconfig
-		
+
 		# Add nvidia settings to xinitrc
 		if ! grep -q "nvidia-settings" $HOME/.xinitrc; then
 			sed -i '1i nvidia-settings --load-config-only &' $HOME/.xinitrc
 		fi
-		
+
 		echo "NVIDIA drivers installed. Reboot required for full functionality."
 	else
 		echo "No NVIDIA GPU detected. Skipping NVIDIA driver installation."
@@ -240,7 +240,7 @@ fi
 if [ $install_julia -eq 1 ]; then
 	echo "Installing Julia..."
 	$doas xbps-install -y juliaup
-	
+
 	if [ ! -e /usr/bin/julia ]; then
 		$doas ln -s /usr/bin/julialauncher /usr/bin/julia
 	fi
