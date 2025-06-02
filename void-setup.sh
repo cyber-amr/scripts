@@ -15,6 +15,7 @@ fi
 install_doas=0
 sync_dotfiles=0
 install_gui=0
+install_brave=0
 install_julia=0
 setup_policykit=0
 
@@ -25,6 +26,7 @@ usage() {
 	echo " -d, --doas        Install doas"
 	echo " -s, --sync        Sync dotfiles"
 	echo " -g, --gui         Install GUI (includes lightdm, compositor, and nvidia drivers)"
+	echo " -b, --brave       Install Brave browser"
 	echo " -j, --julia       Install Julia Programming Language"
 	echo " -p, --policykit   Setup PolicyKit"
 }
@@ -38,6 +40,7 @@ parse_combined_options() {
 			d) install_doas=1 ;;
 			s) sync_dotfiles=1 ;;
 			g) install_gui=1 ;;
+			b) install_brave=1 ;;
 			j) install_julia=1 ;;
 			p) setup_policykit=1 ;;
 			h) usage; exit 0 ;;
@@ -60,6 +63,9 @@ while [ $# -gt 0 ]; do
 			;;
 		-g | --gui)
 			install_gui=1
+			;;
+		-b | --brave)
+			install_brave=1
 			;;
 		-j | --julia)
 			install_julia=1
@@ -244,6 +250,10 @@ EOF
 
 	# packages i use that depends on gui
 	$doas xbps-install -y vscode godot
+fi
+
+if [ $install_brave -eq 1 ]; then
+	bash <(curl -s https://raw.githubusercontent.com/cyber-amr/scripts/refs/heads/main/void-brave-install.sh)
 fi
 
 if [ $install_julia -eq 1 ]; then
