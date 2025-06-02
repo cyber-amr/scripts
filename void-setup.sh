@@ -243,7 +243,7 @@ EOF
 	fi
 
 	# packages i use that depends on gui
-	$doas xbps-install -y firefox vscode godot
+	$doas xbps-install -y vscode godot
 fi
 
 if [ $install_julia -eq 1 ]; then
