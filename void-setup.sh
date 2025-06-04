@@ -177,46 +177,6 @@ fi
 EOL
 	fi
 
-	echo "Setting up compositor..."
-
-	$doas xbps-install -y picom
-
-	mkdir -p $HOME/.config/picom
-
-	tee $HOME/.config/picom/picom.conf > /dev/null <<EOF
-backend = "glx";
-vsync = true;
-detect-rounded-corners = true;
-detect-client-opacity = true;
-detect-transient = true;
-detect-client-leader = true;
-use-damage = true;
-
-# Opacity
-inactive-opacity = 0.9;
-active-opacity = 1.0;
-frame-opacity = 1.0;
-inactive-opacity-override = false;
-
-# Fading
-fading = true;
-fade-delta = 4;
-fade-in-step = 0.03;
-fade-out-step = 0.03;
-
-# Shadow
-shadow = true;
-shadow-radius = 12;
-shadow-offset-x = -15;
-shadow-offset-y = -15;
-shadow-opacity = 0.75;
-EOF
-
-	# Add picom to xinitrc
-	if ! grep -q "picom" $HOME/.xinitrc; then
-		sed -i '1i picom -b &' $HOME/.xinitrc
-	fi
-
 	# intel iGPU drivers
 	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
 
