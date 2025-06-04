@@ -208,6 +208,9 @@ EOF
 		echo "No NVIDIA GPU detected. Skipping NVIDIA driver installation."
 	fi
 
+	# make sure the cache is accessible
+	$doas chown -R $USER:$USER $HOME/.cache/
+
 	# packages i use that depends on gui
 	$doas xbps-install -y vscode godot
 fi
