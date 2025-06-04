@@ -177,6 +177,14 @@ fi
 EOL
 	fi
 
+	echo "Setting up compositor..."
+
+	$doas xbps-install -y xcompmgr
+
+	if ! grep -q "xcompmgr" $HOME/.xinitrc; then
+		sed -i '1i xcompmgr -c &' $HOME/.xinitrc
+	fi
+
 	# intel iGPU drivers
 	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
 
