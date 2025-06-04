@@ -185,6 +185,16 @@ EOL
 		sed -i '1i xcompmgr -c &' $HOME/.xinitrc
 	fi
 
+	echoo "Loading background..."
+
+	if [ ! -e "$HOME/finn-jake-campfire.jpg" ]; then
+		curl https://amr-dev.info/assets/finn-jake-campfire.jpg -o $HOME/finn-jake-campfire.jpg
+	fi
+
+	if ! grep -q "feh" $HOME/.xinitrc; then
+		sed -i '1i feh --no-fehbg --bg-fill $HOME/finn-jake-campfire.jpg' $HOME/.xinitrc
+	fi
+
 	# intel iGPU drivers
 	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
 
