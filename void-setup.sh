@@ -203,6 +203,14 @@ EOL
 		sed -i '1i setxkbmap -layout us,ara -option grp:win_space_toggle' $HOME/.xinitrc
 	fi
 
+	echo "Remapping caps lock to super"
+
+	$doas xbps-install -y xmodmap
+
+	if ! grep -q 'xmodmap.*Caps_Lock' $HOME/.xinitrc 2>/dev/null; then
+		sed -i '1i xmodmap -e "clear lock" -e "keysym Caps_Lock = Super_L" -e "add mod4 = Super_L"' $HOME/.xinitrc
+	fi
+
 	# intel iGPU drivers
 	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
 
