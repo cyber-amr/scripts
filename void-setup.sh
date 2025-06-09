@@ -188,11 +188,11 @@ EOL
 	echoo "Loading background..."
 
 	if [ ! -e "$HOME/finn-jake-campfire.jpg" ]; then
-		curl https://amr-dev.info/assets/finn-jake-campfire.jpg -o $HOME/finn-jake-campfire.jpg
+		curl https://amr-dev.info/assets/wallpaper -o $HOME/wallpaper
 	fi
 
 	if ! grep -q "feh" $HOME/.xinitrc; then
-		sed -i '1i feh --no-fehbg --bg-fill $HOME/finn-jake-campfire.jpg' $HOME/.xinitrc
+		sed -i '1i feh --no-fehbg --bg-fill $HOME/wallpaper' $HOME/.xinitrc
 	fi
 
 	echo "Setting up layouts (us, ara)..."
