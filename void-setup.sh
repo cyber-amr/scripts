@@ -200,7 +200,7 @@ EOL
 	$doas xbps-install -y setxkbmap
 
 	if ! grep -q 'setxkbmap -layout' $HOME/.xinitrc 2>/dev/null; then
-		sed -i '1i setxkbmap -layout us,ara -option grp:win_space_toggle' $HOME/.xinitrc
+		sed -i '1i setxkbmap -layout us,ara,ru -option grp:win_space_toggle' $HOME/.xinitrc
 	fi
 
 	echo "Remapping caps lock to super"
