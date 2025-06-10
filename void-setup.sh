@@ -195,20 +195,12 @@ EOL
 		sed -i '1i feh --no-fehbg --bg-fill $HOME/wallpaper' $HOME/.xinitrc
 	fi
 
-	echo "Setting up layouts (us, ara)..."
+	echo "Setting up layouts (us, ara), and remaping caps to super..."
 
 	$doas xbps-install -y setxkbmap
 
 	if ! grep -q 'setxkbmap -layout' $HOME/.xinitrc 2>/dev/null; then
-		sed -i '1i setxkbmap -layout us,ara,ru -option grp:win_space_toggle' $HOME/.xinitrc
-	fi
-
-	echo "Remapping caps lock to super"
-
-	$doas xbps-install -y xmodmap
-
-	if ! grep -q 'xmodmap.*Caps_Lock' $HOME/.xinitrc 2>/dev/null; then
-		sed -i '1i xmodmap -e "clear lock" -e "keysym Caps_Lock = Super_L" -e "add mod4 = Super_L"' $HOME/.xinitrc
+		sed -i '1i setxkbmap -layout us,ara,ru -option grp:win_space_toggle -option caps:super' $HOME/.xinitrc
 	fi
 
 	# intel iGPU drivers
