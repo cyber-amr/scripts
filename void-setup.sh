@@ -195,12 +195,12 @@ EOL
 		sed -i '1i feh --no-fehbg --bg-fill $HOME/wallpaper' $HOME/.xinitrc
 	fi
 
-	echo "Setting up layouts (us, ara), and remaping caps to super..."
+	echo "Setting up layouts (us, ara), and remaping caps to hyper..."
 
 	$doas xbps-install -y setxkbmap
 
 	if ! grep -q 'setxkbmap -layout' $HOME/.xinitrc 2>/dev/null; then
-		sed -i '1i setxkbmap -layout us,ara,ru -option grp:win_space_toggle -option caps:super' $HOME/.xinitrc
+		sed -i '1i setxkbmap -layout us,ara,ru -option grp:win_space_toggle -option caps:hyper' $HOME/.xinitrc
 	fi
 
 	# intel iGPU drivers
