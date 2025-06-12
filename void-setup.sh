@@ -101,6 +101,17 @@ has_nvidia_gpu() {
 	command -v lspci &> /dev/null && lspci | grep -i nvidia &> /dev/null
 }
 
+# insert <path> <quary> <line>
+insert() {
+	if ! grep -q $2 $1; then
+		if grep -q "^#!" $1; then
+			sed -i "/^#!/a $3" $1
+		else
+			sed -i "1i $3" $1
+		fi
+	fi
+}
+
 echo "Updating system..."
 
 $doas xbps-install -Suy xbps
@@ -181,9 +192,7 @@ EOL
 
 	$doas xbps-install -y xcompmgr
 
-	if ! grep -q "xcompmgr" $HOME/.xinitrc; then
-		sed -i '1i xcompmgr -c &' $HOME/.xinitrc
-	fi
+	insert $HOME/.xinitrc xcompmgr 'xcompmgr -c &'
 
 	echoo "Loading background..."
 
@@ -191,17 +200,13 @@ EOL
 		curl https://amr-dev.info/assets/wallpaper -o $HOME/wallpaper
 	fi
 
-	if ! grep -q "feh" $HOME/.xinitrc; then
-		sed -i '1i feh --no-fehbg --bg-fill $HOME/wallpaper' $HOME/.xinitrc
-	fi
+	insert $HOME/.xinitrc feh 'feh --no-fehbg --bg-fill $HOME/wallpaper'
 
 	echo "Setting up layouts (us, ara, ru)..."
 
 	$doas xbps-install -y setxkbmap
 
-	if ! grep -q 'setxkbmap -layout' $HOME/.xinitrc 2>/dev/null; then
-		sed -i '1i setxkbmap -layout us,ara,ru -option grp:win_space_toggle' $HOME/.xinitrc
-	fi
+	insert $HOME/.xinitrc setxkbmap 'setxkbmap -layout us,ara,ru -option grp:win_space_toggle'
 
 	echo "Applying mod key remaps..."
 
@@ -216,9 +221,7 @@ add mod3 = Hyper_L
 add mod4 = Super_L Super_R
 EOF
 
-	if ! grep -q 'xmodmap' $HOME/.xinitrc 2>/dev/null; then
-		sed -i '1i xmodmap $HOME/.Xmodmap' $HOME/.xinitrc
-	fi
+	insert $HOME/.xinitrc xmodmap 'xmodmap $HOME/.Xmodmap'
 
 	# intel iGPU drivers
 	$doas xbps-install -y mesa-dri intel-video-accel vulkan-loader mesa-vulkan-intel
@@ -242,9 +245,7 @@ EOF
 		$doas nvidia-xconfig
 
 		# Add nvidia settings to xinitrc
-		if ! grep -q "nvidia-settings" $HOME/.xinitrc; then
-			sed -i '1i nvidia-settings --load-config-only &' $HOME/.xinitrc
-		fi
+		insert $HOME/.xinitrc 'nvidia-settings' 'nvidia-settings --load-config-only &'
 
 		echo "NVIDIA drivers installed. Reboot required for full functionality."
 	else
