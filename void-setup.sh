@@ -233,12 +233,7 @@ EOF
 		# Add nvidia modules to be loaded at boot
 		if ! grep -q "nvidia" /etc/modules-load.d/nvidia.conf 2>/dev/null; then
 			$doas mkdir -p /etc/modules-load.d
-			$doas tee /etc/modules-load.d/nvidia.conf > /dev/null <<EOF
-nvidia
-nvidia_modeset
-nvidia_uvm
-nvidia_drm
-EOF
+			$doas sh -c 'printf "nvidia\nnvidia_modeset\nnvidia_uvm\nnvidia_drm\n" > /etc/modules-load.d/nvidia.conf'
 		fi
 
 		# Configure Xorg for NVIDIA
