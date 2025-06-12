@@ -212,14 +212,7 @@ EOL
 
 	$doas xbps-install -y xmodmap
 
-	[ -e $HOME/.Xmodmap ] || $doas tee $HOME/.Xmodmap > /dev/null <<EOF
-clear lock
-clear mod3
-clear mod4
-keycode 66 = Hyper_L
-add mod3 = Hyper_L
-add mod4 = Super_L Super_R
-EOF
+	[ -e $HOME/.Xmodmap ] || curl https://amr-dev.info/dotfiles/.Xmodmap -o $HOME/.Xmodmap
 
 	insert $HOME/.xinitrc xmodmap 'xmodmap $HOME/.Xmodmap'
 
