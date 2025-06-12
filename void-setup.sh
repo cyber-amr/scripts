@@ -170,7 +170,7 @@ if [ $install_gui -eq 1 ]; then
 	if ! grep -q 'exec startx' $HOME/.bash_profile 2>/dev/null; then
 		cat <<'EOL' >> $HOME/.bash_profile
 
-if [ "$(tty)" = "/dev/tty1" ] && [ -z "$DISPLAY" ]; then
+if [ "$(tty)" = "/dev/tty1" ]; then
 	exec startx
 fi
 
