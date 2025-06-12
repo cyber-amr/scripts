@@ -179,13 +179,7 @@ if [ $install_gui -eq 1 ]; then
 	fi
 
 	if ! grep -q 'exec startx' $HOME/.bash_profile 2>/dev/null; then
-		cat <<'EOL' >> $HOME/.bash_profile
-
-if [ "$(tty)" = "/dev/tty1" ]; then
-	exec startx
-fi
-
-EOL
+		printf '\nif [ "$(tty)" = "/dev/tty1" ]; then\n\texec startx\nfi\n' >> $HOME/.bash_profile
 	fi
 
 	echo "Setting up compositor..."
