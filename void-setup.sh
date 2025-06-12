@@ -187,7 +187,7 @@ EOL
 
 	echoo "Loading background..."
 
-	if [ ! -e "$HOME/finn-jake-campfire.jpg" ]; then
+	if [ ! -e "$HOME/wallpaper" ]; then
 		curl https://amr-dev.info/assets/wallpaper -o $HOME/wallpaper
 	fi
 
