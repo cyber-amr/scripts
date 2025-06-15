@@ -132,7 +132,7 @@ fi
 if [ $setup_policykit -eq 1 ]; then
 	echo "Setting up PolicyKit..."
 
-	$doas xbps-install -y polkit polkit-elogind elogind
+	$doas xbps-install -y polkit polkit-elogind elogind pantheon-agent-polkit
 
 	if [ ! -L /var/service/dbus ]; then
 		$doas ln -s /etc/sv/dbus /var/service/
