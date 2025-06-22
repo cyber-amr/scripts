@@ -197,7 +197,7 @@ if [ $install_gui -eq 1 ]; then
 
 	insert $HOME/.xinitrc xcompmgr 'xcompmgr -c &'
 
-	echoo "Loading background..."
+	echo "Loading background..."
 
 	if [ ! -e "$HOME/wallpaper" ]; then
 		curl https://amr-dev.info/assets/wallpaper -o $HOME/wallpaper
