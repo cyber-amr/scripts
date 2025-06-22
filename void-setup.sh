@@ -169,10 +169,12 @@ if [ $install_gui -eq 1 ]; then
 	git clone --depth 1 https://github.com/cyber-amr/dwm.git
 	git clone --depth 1 https://github.com/cyber-amr/dmenu.git
 	git clone --depth 1 https://github.com/cyber-amr/st.git
+	git clone --depth 1 https://github.com/cyber-amr/mini-polkit.git
 
-	$doas make clean install -C ./dwm
-	$doas make clean install -C ./dmenu
-	$doas make clean install -C ./st
+	$doas make install -C ./dwm
+	$doas make install -C ./dmenu
+	$doas make install -C ./st
+	$doas make install -C ./mini-polkit
 
 	if ! grep -q 'exec dwm' $HOME/.xinitrc 2>/dev/null; then
 		echo 'exec dwm' >> $HOME/.xinitrc
@@ -180,6 +182,11 @@ if [ $install_gui -eq 1 ]; then
 
 	if ! grep -q 'exec startx' $HOME/.bash_profile 2>/dev/null; then
 		printf '\nif [ "$(tty)" = "/dev/tty1" ]; then\n\texec startx\nfi\n' >> $HOME/.bash_profile
+	fi
+
+	if [ $setup_policykit -eq 1 ]; then
+		echo "Setting up policy kit agent..."
+		insert $HOME/.xinitrc mini-polkit "mini-polkit \"echo '{{MESSAGE}}' | dmenu -b -P -p 'Password: '\" &"
 	fi
 
 	echo "Setting up compositor..."
