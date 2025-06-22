@@ -244,6 +244,7 @@ if [ $install_gui -eq 1 ]; then
 	fi
 
 	# make sure the cache is accessible
+    mkdir -p "$HOME/.cache"
 	$doas chown -R $USER:$USER $HOME/.cache/
 
 	# packages i use that depends on gui
