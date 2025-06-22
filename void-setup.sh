@@ -176,6 +176,8 @@ if [ $install_gui -eq 1 ]; then
 	$doas make install -C ./st
 	$doas make install -C ./mini-polkit
 
+	$doas xbps-remove -y make gcc libX11-devel libXft-devel libXinerama-devel pkg-config
+
 	if ! grep -q 'exec dwm' $HOME/.xinitrc 2>/dev/null; then
 		echo 'exec dwm' >> $HOME/.xinitrc
 	fi
