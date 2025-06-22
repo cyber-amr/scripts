@@ -103,7 +103,7 @@ has_nvidia_gpu() {
 
 # insert <path> <quary> <line>
 insert() {
-	if ! grep -q $2 $1; then
+	if ! grep -Fq "$2" "$1"; then
 		if grep -q "^#!" $1; then
 			sed -i "/^#!/a $3" $1
 		else
