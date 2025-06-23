@@ -164,7 +164,7 @@ fi
 if [ $install_gui -eq 1 ]; then
 	echo "Installing GUI components..."
 
-	$doas xbps-install -y make gcc libX11-devel libXft-devel libXinerama-devel xorg-server xinit xauth xorg-fonts xorg-input-drivers pkg-config
+	$doas xbps-install -y make gcc libX11-devel libXft-devel libXinerama-devel xorg-server xinit xauth xorg-fonts xorg-input-drivers pkg-config glib-devel polkit-devel
 
 	git clone --depth 1 https://github.com/cyber-amr/dwm.git
 	git clone --depth 1 https://github.com/cyber-amr/dmenu.git
@@ -175,8 +175,6 @@ if [ $install_gui -eq 1 ]; then
 	$doas make install -C ./dmenu
 	$doas make install -C ./st
 	$doas make install -C ./mini-polkit
-
-	$doas xbps-remove -y make gcc libX11-devel libXft-devel libXinerama-devel pkg-config
 
 	if ! grep -q 'exec dwm' $HOME/.xinitrc 2>/dev/null; then
 		echo 'exec dwm' >> $HOME/.xinitrc
