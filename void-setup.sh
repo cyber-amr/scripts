@@ -189,6 +189,12 @@ if [ $install_gui -eq 1 ]; then
 		insert $HOME/.xinitrc mini-polkit "mini-polkit \"echo '{{MESSAGE}}' | dmenu -b -P -p 'Password: '\" &"
 	fi
 
+	echo "Setting up dunst notification daemon..."
+
+	$doas xbps-install -y dunst
+
+	insert $HOME/.xinitrc dunst 'dunst &'
+
 	echo "Setting up compositor..."
 
 	$doas xbps-install -y xcompmgr
