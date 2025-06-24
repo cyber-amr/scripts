@@ -245,6 +245,8 @@ if [ $install_gui -eq 1 ]; then
     mkdir -p "$HOME/.cache"
 	$doas chown -R $USER:$USER $HOME/.cache/
 
+	usermod -a -G video $USER
+
 	# packages i use that depends on gui
 	$doas xbps-install -y vscode godot
 fi
