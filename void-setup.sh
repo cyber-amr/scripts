@@ -189,6 +189,12 @@ if [ $install_gui -eq 1 ]; then
 		insert $HOME/.xinitrc mini-polkit "mini-polkit \"echo '{{MESSAGE}}' | dmenu -b -P -p 'Password: '\" &"
 	fi
 
+	echo "Setting up clipboard manager..."
+
+	$doas xbps-install -y clipmenu
+
+	insert $HOME/.xinitrc clipmenud 'CM_DIR="$HOME/.cache/" clipmenud &'
+
 	echo "Setting up dunst notification daemon..."
 
 	$doas xbps-install -y dunst
